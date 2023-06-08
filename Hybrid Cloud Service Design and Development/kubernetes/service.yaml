@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: Hybrid Cloud Service Design and Development
+  labels:
+    app: Hybrid Cloud Service Design and Development
+spec:
+  ports:
+    - port: 8080
+      targetPort: 8080
+  selector:
+    app: Hybrid Cloud Service Design and Development

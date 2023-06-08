@@ -1,0 +1,90 @@
+server:
+  port: 8088
+
+---
+
+spring:
+  profiles: default
+  cloud:
+    gateway:
+      routes:
+        - id: Hybrid Cloud Service Design and Development
+          uri: http://localhost:8082
+          predicates:
+            - Path=/hybridCloudServices/**, 
+        - id: External Cloud Service Integration and Management
+          uri: http://localhost:8083
+          predicates:
+            - Path=/cloudServiceIntegrations/**, 
+        - id: Security Management and Monitoring
+          uri: http://localhost:8085
+          predicates:
+            - Path=/securityPolicies/**, 
+        - id: Customer Relationship Management
+          uri: http://localhost:8088
+          predicates:
+            - Path=/customers/**, 
+        - id: Maintenance and Support Services
+          uri: http://localhost:8092
+          predicates:
+            - Path=/supportTickets/**, 
+        - id: frontend
+          uri: http://localhost:8080
+          predicates:
+            - Path=/**
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins:
+              - "*"
+            allowedMethods:
+              - "*"
+            allowedHeaders:
+              - "*"
+            allowCredentials: true
+
+
+---
+
+spring:
+  profiles: docker
+  cloud:
+    gateway:
+      routes:
+        - id: Hybrid Cloud Service Design and Development
+          uri: http://hybridCloudServiceDesignAndDevelopment:8080
+          predicates:
+            - Path=/hybridCloudServices/**, 
+        - id: External Cloud Service Integration and Management
+          uri: http://externalCloudServiceIntegrationAndManagement:8080
+          predicates:
+            - Path=/cloudServiceIntegrations/**, 
+        - id: Security Management and Monitoring
+          uri: http://securityManagementAndMonitoring:8080
+          predicates:
+            - Path=/securityPolicies/**, 
+        - id: Customer Relationship Management
+          uri: http://customerRelationshipManagement:8080
+          predicates:
+            - Path=/customers/**, 
+        - id: Maintenance and Support Services
+          uri: http://maintenanceAndSupportServices:8080
+          predicates:
+            - Path=/supportTickets/**, 
+        - id: frontend
+          uri: http://frontend:8080
+          predicates:
+            - Path=/**
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins:
+              - "*"
+            allowedMethods:
+              - "*"
+            allowedHeaders:
+              - "*"
+            allowCredentials: true
+
+server:
+  port: 8080
